@@ -1,0 +1,316 @@
+:root {
+    --dark: #272727;
+    --med: #707070;
+    --light: #e9e9e9;
+    --accent: #525763;
+    font-size: 1vw;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: inline;
+    background-color: var(--med);
+    color: var(--light);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+    height: 35px;
+    background-color: var(--dark);
+    z-index: 100;
+    text-align: center;
+}
+
+header > * {
+    padding: 5px 0 0;
+    margin: 0;
+}
+
+#left-menu {
+    position: fixed;
+    top: 35px;
+    left: 0;
+    height: 100%;
+    width: 10%;
+    background-color: var(--dark);
+    margin-top: 0;
+    z-index: 200;
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+}
+
+#left-menu button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    color: var(--light);
+    background-color: transparent;
+    border: 1px solid var(--med);
+    border-radius: 5px;
+    padding: 10px 0 10px 10px;
+    margin: 5px 10px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 300;
+    text-align: left;
+    width: 80%;
+}
+
+#left-menu button:hover {
+    background-color: var(--med);
+}
+
+#left-menu button:first-of-type {
+    margin-top: 50px
+}
+
+#right-menu {
+    position: fixed;
+    top: 35px;
+    right: 0;
+    height: 100%;
+    width: 2.5%;
+    background-color: var(--dark);
+    margin-top: 0;
+    z-index: 200;
+}
+
+#categories {
+    padding-left: 10%;
+    padding-top: 5px;
+    margin-top: 35px;
+    position: fixed;
+    display: flex;
+    flex-wrap: nowrap;
+    z-index: 100;
+    background-color: var(--accent);
+    width: 100%;
+    font-size: 1rem;
+    box-shadow: 0 8px 6px -6px black;
+
+}
+
+#categories > * {
+    border: 1px solid var(--light);
+    color: var(--light);
+    background-color: var(--accent);
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px;
+    font-size: 1rem;
+}
+
+#categories button:hover,
+#categories button.active,
+#subcategories button:hover,
+#subcategories button.active {
+    background-color: var(--med);
+}
+
+
+#categories p {
+    border: 1px solid transparent;
+    cursor: default;
+    padding: 10px;
+    margin: 5px;
+    font-size: 1rem;
+}
+
+#subcategories {
+    padding-left: 10%;
+    margin-top: 90px;
+    position: fixed;
+    display: flex;
+    /* display: none; */
+    flex-wrap: nowrap;
+    z-index: 100;
+    background-color: var(--accent);
+    width: 100%;
+    box-shadow: 0 8px 6px -6px black;
+
+}
+
+#subcategories > * {
+    border: 1px solid var(--light);
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 5px;
+    font-size: .80rem;
+    color: var(--light);
+    background-color: var(--accent);
+}
+
+#subcategories p {
+    border: 1px solid transparent;
+    cursor: default;
+}
+
+#content {
+    border: 1px solid var(--med);
+    position: relative;
+    margin-top: 140px;
+    margin-left: 10%;
+    height: 80%;
+    width: 85%;
+    overflow: auto;
+}
+
+@keyframes todoFade {
+    0% {
+        transform: translateX(-25%) scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(0) scale(0.8);
+    }
+    80% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    90% {
+        transform: scale(0.99);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@-moz-keyframes todoFade {
+    0% {
+        transform: translateX(-25%) scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(0) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.todo {
+    -moz-animation: todoFade .5s linear;
+    animation: todoFade .8s linear;
+    /* animation: bounce 1s linear; */
+    border: 1px solid var(--light);
+    border-radius: 5px;
+    margin: 5px 5px;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 72px;
+    background-color: var(--accent);
+    overflow: hidden;
+    transition: opacity 0.7s;
+}
+
+.todo > * {
+    padding: 10px;
+}
+
+.todo * {
+    align-items: center;
+    align-content: center;
+}
+
+.todo-text {
+    flex: 5 0 75%;
+    display: flex;
+}
+
+.todo h3, .todo h4 {
+    margin: 0;
+}
+
+.todo-text p {
+    margin: 5px 0 0;
+}
+
+.todo-info {
+    flex: 5 0 80%;
+    /* text-overflow: ellipsis; */
+    overflow: hidden;
+    /* white-space: nowrap; */
+    position: relative;
+    height: 100%;
+}
+
+/* .todo-info p { */
+    /* position: relative; */
+    /* width: 100%;
+    height: 100%; */
+    /* white-space: nowrap; */
+    /* line-height: 1em; */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    /* width: 100%; */
+/* } */
+
+.todo-categories {
+    flex: 1 0 10%;
+}
+
+.done {
+    opacity: 0.5;
+    background-color: var(--med);
+    transition: opacity 0.7s;
+}
+
+.todo-due {
+    flex: 1 0 15%;
+    border-left: solid 1px var(--light);
+    padding: 10px 10px;
+    margin: auto 0;
+}
+
+.todo-due p {
+    padding: 0;
+    margin: auto 0;
+    /* line-height: 70px; */
+}
+
+.todo-buttons {
+    flex: 1 0 5%;
+    border-left: solid 1px var(--light);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+    background-color: var(--med);
+    margin: 15% auto;
+    padding: 50px;
+    border: 1px solid #888;
+    width: 75%;
+}
+
+.close {
+    color: var(--dark);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin: auto;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
