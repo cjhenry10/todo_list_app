@@ -8,19 +8,54 @@ export function createPageSections() {
     const header = document.createElement("header");
     const headerH = document.createElement("h4");
     headerH.textContent = "To Do List App";
-    header.appendChild(headerH);
+    // header.appendChild(headerH);
+
+    const clock = document.createElement("h4");
+    clock.id = "clock";
+
+    function time() {
+        let d = new Date();
+
+        let day = d.toLocaleString('en-US', {weekday: 'long'});
+        let date = d.toLocaleString('default', {date: 'long'});
+
+        clock.textContent = `${day} ${date}`;
+
+    }
+    time();
+    setInterval(time, 1000);
+    header.appendChild(clock);
 
     const leftMenu = document.createElement("menu");
     leftMenu.id = "left-menu";
     const addCategoryBtn = document.createElement("button");
     addCategoryBtn.id = "add-category";
-    addCategoryBtn.textContent = "Category";
+    const addCatIcon = document.createElement("i");
+    addCatIcon.classList.add("bi");
+    addCatIcon.classList.add("bi-bookmarks-fill");
+    addCategoryBtn.appendChild(addCatIcon);
+    const addCatText = document.createElement("span");
+    addCatText.textContent = "Category";
+    addCategoryBtn.appendChild(addCatText);
     const addSubcatBtn = document.createElement("button");
     addSubcatBtn.id = "add-subcategory";
-    addSubcatBtn.textContent = "Subcategory";
+    const addSubcatIcon = document.createElement("i");
+    addSubcatIcon.classList.add("bi");
+    addSubcatIcon.classList.add("bi-bookmark-star-fill");
+    addSubcatBtn.appendChild(addSubcatIcon);
+    const addSubcatText = document.createElement("span");
+    addSubcatText.textContent = "Subcategory";
+    addSubcatBtn.appendChild(addSubcatText);
+
     const addTask = document.createElement("button");
     addTask.id = "add-task";
-    addTask.textContent = "Task";
+    const addIcon = document.createElement("i");
+    addIcon.classList.add("bi");
+    addIcon.classList.add("bi-check-circle-fill");
+    addTask.appendChild(addIcon);
+    const addTaskText = document.createElement("span");
+    addTaskText.textContent = "Task";
+    addTask.appendChild(addTaskText);
 
     const modalDiv = document.createElement("div");
     modalDiv.classList.add("modal");
@@ -28,7 +63,7 @@ export function createPageSections() {
     modalContent.classList.add("modal-content");
     const closeModal = document.createElement("span");
     closeModal.classList.add("close");
-    closeModal.textContent = "CLOSE BUTTON";
+    closeModal.textContent = "X";
 
     modalContent.appendChild(closeModal);
     modalDiv.appendChild(modalContent);
@@ -155,7 +190,7 @@ export function createPageSections() {
     }
 
     addTask.onclick = () => {
-        if (modalContent.childNodes.length > 1) {
+        while (modalContent.childNodes.length > 1) {
             modalContent.removeChild(modalContent.lastChild);
         }
 
@@ -177,7 +212,7 @@ export function createPageSections() {
         detailLb.htmlFor = "detail";
         detailLb.textContent = "Details: ";
         const detailIn = document.createElement("textarea");
-        detailIn.rows = "2";
+        detailIn.rows = "1";
         detailIn.cols = "16";
         detailIn.name = "detail";
         taskForm.appendChild(detailLb);
@@ -360,16 +395,29 @@ export function createPageSections() {
 
     const rightMenu = document.createElement("menu");
     rightMenu.id = "right-menu";
+
+    
+    const catIcon = document.createElement("i");
+    catIcon.classList.add("bi");
+    catIcon.classList.add("bi-bookmarks-fill");
+    
+    const subcatIcon = document.createElement("i");
+    subcatIcon.classList.add("bi");
+    subcatIcon.classList.add("bi-bookmark-star-fill");
+    
+
     const categories = document.createElement("section");
     categories.id = "categories";
     const catP = document.createElement("p");
     catP.textContent = "Categories";
-    categories.appendChild(catP);
+    categories.appendChild(catIcon);
+    // categories.appendChild(catP);
     const subcategories = document.createElement("section");
     subcategories.id = "subcategories";
     const subP = document.createElement("p");
     subP.textContent = "Subcategories";
-    subcategories.appendChild(subP);
+    subcategories.appendChild(subcatIcon);
+    // subcategories.appendChild(subP);
     const content = document.createElement("section");
     content.id = "content";
 
@@ -397,13 +445,47 @@ export function addTodoDom(todoObject) {
     const todoInfo = document.createElement("div");
     todoInfo.classList.add("todo-info");
     const todoTitle = document.createElement("h3");
-    todoTitle.textContent = todoObject.title;
+    const todoIcon = document.createElement("i");
+    todoIcon.classList.add("bi");
+    todoIcon.classList.add("bi-check-circle-fill");
+    // todoTitle.appendChild(todoIcon);
+    const todoTitleText = document.createElement("span");
+    todoTitleText.textContent = todoObject.title;
+    todoTitle.appendChild(todoTitleText);
     const todoDetail = document.createElement("p");
     todoDetail.textContent = todoObject.details;
     todoInfo.appendChild(todoTitle);
     todoInfo.appendChild(todoDetail);
     todoText.appendChild(todoInfo);
 
+    const todoShow = document.createElement("button");
+    todoShow.style.cursor = "pointer";
+    const moreIcon = document.createElement("i");
+    moreIcon.classList.add("bi");
+    moreIcon.classList.add("bi-caret-down-fill");
+    todoShow.appendChild(moreIcon);
+    todoShow.classList.add("more-less");
+    const lessIcon = document.createElement("i");
+    lessIcon.classList.add("bi");
+    lessIcon.classList.add("bi-caret-up-fill");
+    todoShow.onclick = function() {
+        if (newTodo.classList.contains("todo-show")) {
+            newTodo.classList.toggle("todo-show");
+            todoShow.removeChild(lessIcon);
+            todoShow.appendChild(moreIcon);
+        }
+        else {
+            newTodo.classList.toggle("todo-show");
+            todoShow.removeChild(moreIcon);
+            todoShow.appendChild(lessIcon);
+        }
+    }
+
+    if (todoDetail.textContent.length > 125) {
+        todoText.appendChild(todoShow);
+    }
+
+    
     const todoCategory = document.createElement("div");
     todoCategory.classList.add("todo-categories");
     const category = document.createElement("h4");
@@ -414,12 +496,6 @@ export function addTodoDom(todoObject) {
     todoCategory.appendChild(subcategory);
     todoText.appendChild(todoCategory);
 
-    const todoShow = document.createElement("button");
-    todoShow.textContent = "More";
-    todoShow.onclick = function() {
-        // code to show the rest of details ??
-    }
-    todoText.appendChild(todoShow);
 
     newTodo.appendChild(todoText);
 
@@ -437,25 +513,41 @@ export function addTodoDom(todoObject) {
     const todoButtons = document.createElement("div");
     todoButtons.classList.add("todo-buttons");
     const completeBtn = document.createElement("button");
-    completeBtn.textContent = todoObject.done;
+    completeBtn.style.width = "2rem";
+    const noCheckIcon = document.createElement("i");
+    noCheckIcon.classList.add("bi");
+    noCheckIcon.classList.add("bi-circle-fill");
+    const checkIcon = document.createElement("i");
+    checkIcon.classList.add("bi");
+    checkIcon.classList.add("bi-check-circle-fill");
+    if (todoObject.done) completeBtn.appendChild(checkIcon);
+    else completeBtn.appendChild(noCheckIcon);
+
     completeBtn.onclick = function() {
         if (todoObject.done === false) {
             todoObject.done = true;
-            completeBtn.textContent = todoObject.done;
+            completeBtn.removeChild(noCheckIcon);
+            completeBtn.appendChild(checkIcon);
             newTodo.classList.toggle("done");
         }
         else {
             todoObject.done = false;
-            completeBtn.textContent = todoObject.done;
+            completeBtn.removeChild(checkIcon);
+            completeBtn.appendChild(noCheckIcon);
             newTodo.classList.toggle("done");
         }
     }
     todoButtons.appendChild(completeBtn);
     const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "X";
+    const deleteIcon = document.createElement("i");
+    deleteIcon.classList.add("bi");
+    deleteIcon.classList.add("bi-x-lg");
+    deleteBtn.appendChild(deleteIcon);
     deleteBtn.onclick = function() {
-        todo.removeTodo(todoObject.title);
-        parent.removeChild(newTodo);
+        if (confirm("Delete this task?")) {
+            todo.removeTodo(todoObject.title);
+            parent.removeChild(newTodo);
+        }
     }
     todoButtons.appendChild(deleteBtn);
     newTodo.appendChild(todoButtons);

@@ -12,9 +12,11 @@ newTodo.subcategory = "subcategory";
 // addTodoDom(newTodo);
 todo.addToList(newTodo);
 
-let newTodo1 = todo.newTodo("to do test1", "asdfg", "12/21", 3);
+let newTodo1 = todo.newTodo("to do test1", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam impedit ab, autem, nobis similique sunt facilis minima quidem aliquid consequatur aperiam! Hic libero voluptatibus quasi dolores dolor quis delectus doloremque maiores maxime ducimus sed similique alias voluptate vitae consectetur expedita unde esse minima sunt labore ab, placeat vero. Iure, provident.", "12/21", 3);
 newTodo1.category = "category2";
 newTodo1.subcategory = "subcategory2";
+
+
 
 todo.addToList(newTodo1);
 
@@ -45,8 +47,8 @@ addCategoryDom("Unsorted");
 addCategoryDom("category");
 addCategoryDom("category2");
 addSubcategoryDom("subcategory2", "category2");
-addSubcategoryDom("subcategory1", "category2");
+addSubcategoryDom("subcategory", "category2");
 addSubcategoryDom("subcategory3", "category");
 
 
-console.log(subCategoryButtons);
+// console.log(subCategoryButtons);
