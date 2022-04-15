@@ -6,6 +6,11 @@
     --med: hsl(268, 20%, 10%);
     --light: hsl(268, 20%, 90%);
     --accent: hsl(268, 20%, 20%);
+    /* --base: hsl(230, 50%, 50%);
+    --dark: hsl(230, 50%, 50%);
+    --med: #d8dee9;
+    --light: #14131a;
+    --accent: hsl(230, 40%, 40%); */
     
     font-size: 1vw;
 }
